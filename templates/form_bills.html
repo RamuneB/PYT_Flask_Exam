@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form method="POST" action="#" novalidate>
+        {{ form.csrf_token }}
+        <div class="form-group">
+            {{ form.suma.label(class="form-control-label") }}
+            {{ form.suma(class="form-control") }}
+            {% if form.suma.errors %}
+                {% for error in form.suma.errors %}
+                    <small><font color="red">{{ error }}</font></small>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.papildoma_info.label(class="form-control-label") }}
+            {{ form.papildoma_info(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-primary") }}
+        </div
+        
+    </form>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h4>{{ grupes_saskaitos.pavadinimas }}</h4>
+    <hr>
+    {% if nuotrauka %}
+        <img class="rounded-circle account-img" src="{{ nuotrauka }}">
+    {% else %}
+        <img class="rounded-circle account-img" src="https://via.placeholder.com/125">
+    {% endif %}
+    <p><b>Autorius:</b> {{ grupes_saskaitos.vartotojas.vardas }}</p>
+    <p><b>Grupe:</b> {{ grupes_saskaitos.grupe.pavadinimas }}</p>
+    <p>{{ grupes_saskaitos.tekstas }}</p>
+{% endblock %}

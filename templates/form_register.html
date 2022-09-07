@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% set active_page = "registration" %}
+
+{% block content %}
+    <div class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Prisiregistruokite</legend>
+                <div class="mb-2">
+                    {{ form.vardas.label(class="form-text") }}
+
+                    {% if form.vardas.errors %}
+                        {{ form.vardas(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.vardas.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.vardas(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="mb-2">
+                    {{ form.el_pastas.label(class="form-text") }}
+                    {% if form.el_pastas.errors %}
+                        {{ form.el_pastas(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.el_pastas.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.el_pastas(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="mb-2">
+                    {{ form.slaptazodis.label(class="form-text") }}
+                    {% if form.slaptazodis.errors %}
+                        {{ form.slaptazodis(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.slaptazodis.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.slaptazodis(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="mb-2">
+                    {{ form.patvirtintas_slaptazodis.label(class="form-text") }}
+                    {% if form.patvirtintas_slaptazodis.errors %}
+                        {{ form.patvirtintas_slaptazodis(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.patvirtintas_slaptazodis.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.patvirtintas_slaptazodis(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-primary") }}
+            </div>
+        </form>
+    </div>
+    <!-- <div class="border-top pt-3"> -->
+        <!-- <small class="text-muted"> -->
+<!--            Already Have An Account? <a class="ml-2" href="{{ url_for('index') }}">Sign In</a>-->
+        <!-- </small> -->
+    <!-- </div> -->
+{% endblock content %}

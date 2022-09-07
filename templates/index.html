@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% for grupes_saskaitos in grupes_saskaitos.items %}
+    <h4>{{ grupes_saskaitos.pavadinimas }}</h4>
+    <hr>
+    <p>
+        {{ grupes_saskaitos.tekstas[:20] }}
+        <!-- <a href="/straipsniai/{{ loop.index0 }}"> -->
+        <a href="{{ url_for('article', article_id=grupes_saskaitos.id) }}">
+            ...skaityti toliau
+        </a></p>
+    <br><br>
+{% endfor %}
+
+{% for page_num in grupes_saskaitos.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+  {% if page_num %}
+    {% if grupes_saskaitos.page == page_num %}
+      <a class="btn btn-info mb-4" href="{{ url_for('index', page=page_num) }}">{{ page_num }}</a>
+    {% else %}
+      <a class="btn btn-outline-info mb-4" href="{{ url_for('index', page=page_num) }}">{{ page_num }}</a>
+    {% endif %}
+  {% else %}
+    ...
+  {% endif %}
+{% endfor %}
+
+{% endblock %}
