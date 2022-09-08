@@ -22,6 +22,7 @@ class PrisijungimoForma(FlaskForm):
 
 
 class StraipsnioForma(FlaskForm):
+    suma = IntegerField('Suma', [DataRequired()])
     pavadinimas = StringField('Pavadinimas', [DataRequired()])
     tekstas = TextAreaField('Tekstas', [DataRequired()])
     grupe = QuerySelectField(
@@ -29,7 +30,9 @@ class StraipsnioForma(FlaskForm):
         get_label="pavadinimas", 
         get_pk=lambda obj: obj.id,
         allow_blank=True)
+   
     submit = SubmitField('Išsaugoti')
+    
 
 
 class PaskyrosAtnaujinimoForma(FlaskForm):
@@ -41,6 +44,12 @@ class PaskyrosAtnaujinimoForma(FlaskForm):
 class IncomeForm(FlaskForm):
     suma = IntegerField('Suma', [DataRequired()])
     #siuntejas = StringField('Siuntėjas', [DataRequired(message='Nenurodytas siuntėjas')])
+    pavadinimas = StringField('Pavadinimas', [DataRequired()])
+    grupe = QuerySelectField(
+        query_factory=lambda: app.Grupe.query, 
+        get_label="pavadinimas", 
+        get_pk=lambda obj: obj.id,
+        allow_blank=True)
     papildoma_info = TextAreaField('Papildoma info')
     submit = SubmitField('Išsaugoti')
 

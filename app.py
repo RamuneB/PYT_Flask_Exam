@@ -59,9 +59,10 @@ class IncomeRecord(db.Model):
     __tablename__ = 'saskaitos'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     suma = db.Column(db.Integer, nullable=False)
+    pavadinimas = db.Column("Pavadinimas", db.String(200), nullable=False)
     #siuntejas = db.Column(db.String(100), nullable=False)
     papildoma_info = db.Column(db.Text, nullable=True)
-
+    #grupe = db.relationship('grupe', back_populates='incomerecord')
 
 
 import os
@@ -187,18 +188,28 @@ def profile():
         nuotrauka = None
     return render_template('profilis.html', title='Account', form=form, nuotrauka=nuotrauka)
     # return render_template('profilis.html', form=form)
-
-
+'''
+@app.route('/')
+def index1():
+    balansas = 0
+    pajamu_irasai = IncomeRecord.query.all()
+    
+    for record in pajamu_irasai:
+        balansas += record.suma
+    
+    return render_template('index.html', balansas=balansas,
+        pajamu_irasai=pajamu_irasai)
+'''
 @app.route("/grupe_saskaitos/naujas", methods=['GET', 'POST'])
 @login_required
 def article_create():
     form = forms.StraipsnioForma()
     if form.validate_on_submit():
         grupes_saskaitos = Grupesaskaitos(
-            pavadinimas=form.pavadinimas.data,
-            tekstas=form.tekstas.data,
-            vartotojas_id=current_user.id,
-            grupe_id = form.grupe.data.id)
+        pavadinimas=form.pavadinimas.data,
+        tekstas=form.tekstas.data,
+        vartotojas_id=current_user.id,
+        grupe_id = form.grupe.data.id)
         db.session.add(grupes_saskaitos)
         db.session.commit()
         return redirect(url_for('index'))
